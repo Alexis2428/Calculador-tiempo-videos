@@ -1,0 +1,22 @@
+{
+  "name": "calculador-tiempo-videos",
+  "version": "1.0.0",
+  "description": "Calcula el tiempo total de varios videos",
+  "main": "main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexis2428/Calculador-tiempo-videos.git"
+  },
+  "author": "Alexis Landa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexis2428/Calculador-tiempo-videos/issues"
+  },
+  "homepage": "https://github.com/Alexis2428/Calculador-tiempo-videos#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}
