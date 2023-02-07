@@ -9,6 +9,7 @@
     <title>Calculador tiempo de videos</title>
 </head>
 <body>
+    <form name="formulario" class="container">
         <div class="alert alert-info text-center" role="alert">
             <h4 class="alert-heading">Calculador tiempo de videos</h4>
             <p class="mb-0">
@@ -19,8 +20,15 @@
         <button type="button" name="agregar" class="btn btn-outline-primary mb-2">Agregar</button>
         <button type="button" name="borrar" class="btn btn-outline-danger mb-2">Borrar último video</button>
 
+        <div name="videos" class="mb-2"></div>
+
         <button type="button" name="calcular" class="btn btn-outline-primary mb-2 oculto">Calcular tiempo total</button>
 
+        <div name="respuesta" class="oculto">
+            <p>El tiempo total de los videos es ... <strong id="tiempo-total"></strong></p>
+        </div>
+
         <button type="reset" name="reiniciar" class="btn btn-outline-secondary oculto">Reiniciar</button>
+    </form>
 </body>
 </html>
