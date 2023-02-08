@@ -69,6 +69,8 @@ function borrarUltimoVideo() {
         if (0 === ultimoIndice) {
             ocultarBotonCalcular();
             ocultarBotonReiniciar();
+            borrarErroresAnteriores();
+            ocultarErrores();
         }
 
         const $titulosVideos = $formulario.querySelectorAll('#videos h5');
@@ -167,8 +169,10 @@ function arreglarSemanticaRespuesta(valor, tiempo) {
 
 function reiniciar() {
     borrarVideosAnteriores();
+    borrarErroresAnteriores();
     ocultarBotonCalcular();
     ocultarRespuesta();
+    ocultarErrores();
     ocultarBotonReiniciar();
 }
 
