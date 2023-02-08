@@ -57,3 +57,26 @@ function borrarUltimoVideo() {
     }
 }
 
+function mostrarBotonCalcular() {
+    $formulario.calcular.classList.remove('oculto');
+}
+
+function ocultarBotonCalcular() {
+    $formulario.calcular.classList.add('oculto');
+}
+
+function mostrarBotonReiniciar() {
+    $formulario.reiniciar.classList.remove('oculto');
+}
+
+function ocultarBotonReiniciar() {
+    $formulario.reiniciar.classList.add('oculto');
+}
+
+function mostrarRespuesta() {
+    $formulario.querySelector('#respuesta').className = '';
+}
+
+function ocultarRespuesta() {
+    $formulario.querySelector('#respuesta').className = 'oculto';
+}
