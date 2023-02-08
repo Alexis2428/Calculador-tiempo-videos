@@ -68,12 +68,17 @@ function borrarUltimoVideo() {
     if (0 <= ultimoIndice) {
         if (0 === ultimoIndice) {
             ocultarBotonCalcular();
+            ocultarBotonReiniciar();
         }
 
         const $titulosVideos = $formulario.querySelectorAll('#videos h5');
         $videos[ultimoIndice].remove();
         $titulosVideos[ultimoIndice].remove();
     }
+    
+    ocultarRespuesta();
+}
+
 function obtenerRespuesta() {
     $formulario.querySelector('#tiempo-total').textContent = obtenerTiempoTotal();
     mostrarRespuesta();
