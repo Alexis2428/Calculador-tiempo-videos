@@ -1,3 +1,22 @@
+const $formulario = document.formulario;
+
+const $agregar = $formulario.agregar;
+$agregar.onclick = agregar;
+
+const $borrar = $formulario.borrar;
+$borrar.onclick = borrarUltimoVideo;
+
+const $calcular = $formulario.calcular;
+$calcular.onclick = obtenerRespuesta;
+
+const $reiniciar = $formulario.reiniciar;
+$reiniciar.onclick = reiniciar;
+
+function agregar() {
+    crearVideo();
+    mostrarBotonCalcular();
+}
+
 function crearVideo() {
     const indice = $formulario.querySelectorAll('.video').length + 1;
 
@@ -54,6 +73,70 @@ function borrarUltimoVideo() {
         const $titulosVideos = $formulario.querySelectorAll('#videos h5');
         $videos[ultimoIndice].remove();
         $titulosVideos[ultimoIndice].remove();
+    }
+function obtenerRespuesta() {
+    $formulario.querySelector('#tiempo-total').textContent = obtenerTiempoTotal();
+    mostrarRespuesta();
+    mostrarBotonReiniciar();
+}
+
+function obtenerTiempoTotal() {
+    let totalSegundos = calcularTiempo('segundos');
+    let totalMinutos = calcularTiempo('minutos');
+    let totalHoras = calcularTiempo('horas');
+    const LIMITE_TIEMPO = 60;
+
+    if (LIMITE_TIEMPO <= totalSegundos) {
+        const cantidadVecesPasaLimite = obtenerCantidadVecesPasaLimite(totalSegundos, LIMITE_TIEMPO);
+        totalSegundos -= (LIMITE_TIEMPO * cantidadVecesPasaLimite);
+        totalMinutos += cantidadVecesPasaLimite;
+    }
+
+    if (LIMITE_TIEMPO <= totalMinutos) {
+        const cantidadVecesPasaLimite = obtenerCantidadVecesPasaLimite(totalMinutos, LIMITE_TIEMPO);
+        totalMinutos -= (LIMITE_TIEMPO * cantidadVecesPasaLimite);
+        totalHoras += cantidadVecesPasaLimite;
+    }
+
+    return `${totalHoras} horas, ${totalMinutos} minutos y ${totalSegundos} segundos`;
+}
+
+function calcularTiempo(tiempo) {
+    const $tiempo = $formulario.querySelectorAll(`.cantidad-${tiempo}`);
+    let total = 0;
+
+    for (let i = 0; i < $tiempo.length; i++) {
+        total += Number($tiempo[i].value);
+    }
+
+    return total;
+}
+
+function obtenerCantidadVecesPasaLimite(tiempo, LIMITE_TIEMPO) {
+    let cantidad = 0;
+
+    while (LIMITE_TIEMPO <= tiempo) {
+        tiempo -= LIMITE_TIEMPO;
+        cantidad++;
+    }
+
+    return cantidad;
+}
+
+function reiniciar() {
+    borrarVideosAnteriores();
+    ocultarBotonCalcular();
+    ocultarRespuesta();
+    ocultarBotonReiniciar();
+}
+
+function borrarVideosAnteriores() {
+    const $videos = $formulario.querySelectorAll('.video');
+    const $titulosVideos = $formulario.querySelectorAll('#videos h5');
+
+    for (let i = 0; i < $videos.length; i++) {
+        $videos[i].remove();
+        $titulosVideos[i].remove();
     }
 }
 
