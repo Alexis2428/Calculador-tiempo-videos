@@ -190,3 +190,11 @@ function mostrarRespuesta() {
 function ocultarRespuesta() {
     $formulario.querySelector('#respuesta').className = 'oculto';
 }
+
+function mostrarErrores() {
+    $formulario.querySelector('#errores').classList.remove('oculto');
+}
+
+function ocultarErrores() {
+    $formulario.querySelector('#errores').classList.add('oculto');
+}
