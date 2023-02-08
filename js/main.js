@@ -80,15 +80,31 @@ function borrarUltimoVideo() {
 }
 
 function obtenerRespuesta() {
-    $formulario.querySelector('#tiempo-total').textContent = obtenerTiempoTotal();
-    mostrarRespuesta();
-    mostrarBotonReiniciar();
+    const $segundos = $formulario.querySelectorAll('.cantidad-segundos');
+    const $minutos = $formulario.querySelectorAll('.cantidad-minutos');
+    const $horas = $formulario.querySelectorAll('.cantidad-horas');
+    
+    const campoSegundosValido = validarTiempo($segundos);
+    const campoMinutosValido = validarTiempo($minutos);
+    const campoHorasValido = validarTiempo($horas);
+
+    if (campoSegundosValido && campoMinutosValido && campoHorasValido) {
+        borrarErroresAnteriores();
+        $formulario.querySelector('#tiempo-total').textContent = obtenerTiempoTotal($segundos, $minutos, $horas);
+        mostrarRespuesta();
+        ocultarErrores();
+        mostrarBotonReiniciar();
+
+    } else {
+        ocultarRespuesta();
+        mostrarErrores();
+    }
 }
 
-function obtenerTiempoTotal() {
-    let totalSegundos = calcularTiempo('segundos');
-    let totalMinutos = calcularTiempo('minutos');
-    let totalHoras = calcularTiempo('horas');
+function obtenerTiempoTotal($segundos, $minutos, $horas) {
+    let totalSegundos = calcularTiempo($segundos);
+    let totalMinutos = calcularTiempo($minutos);
+    let totalHoras = calcularTiempo($horas);
     const LIMITE_TIEMPO = 60;
 
     if (LIMITE_TIEMPO <= totalSegundos) {
@@ -106,12 +122,11 @@ function obtenerTiempoTotal() {
     return devolverRespuesta(totalHoras, totalMinutos, totalSegundos);
 }
 
-function calcularTiempo(tiempo) {
-    const $tiempo = $formulario.querySelectorAll(`.cantidad-${tiempo}`);
+function calcularTiempo($numerosTiempo) {
     let total = 0;
 
-    for (let i = 0; i < $tiempo.length; i++) {
-        total += Number($tiempo[i].value);
+    for (let i = 0; i < $numerosTiempo.length; i++) {
+        total += Number($numerosTiempo[i].value);
     }
 
     return total;
