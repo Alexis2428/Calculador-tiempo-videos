@@ -98,7 +98,7 @@ function obtenerTiempoTotal() {
         totalHoras += cantidadVecesPasaLimite;
     }
 
-    return `${totalHoras} horas, ${totalMinutos} minutos y ${totalSegundos} segundos`;
+    return devolverRespuesta(totalHoras, totalMinutos, totalSegundos);
 }
 
 function calcularTiempo(tiempo) {
@@ -121,6 +121,28 @@ function obtenerCantidadVecesPasaLimite(tiempo, LIMITE_TIEMPO) {
     }
 
     return cantidad;
+}
+
+function devolverRespuesta(totalHoras, totalMinutos, totalSegundos) {
+    let respuesta;
+
+    respuesta = `${arreglarSemanticaRespuesta(totalHoras, 'hora')}, `;
+    respuesta += `${arreglarSemanticaRespuesta(totalMinutos, 'minuto')} y `;
+    respuesta += arreglarSemanticaRespuesta(totalSegundos, 'segundo');
+
+    return respuesta;
+}
+
+function arreglarSemanticaRespuesta(valor, tiempo) {
+    let parteRespuesta = `${valor}`;
+
+    if (1 === valor) {
+        parteRespuesta += ` ${tiempo}`;
+    } else {
+        parteRespuesta += ` ${tiempo}s`;
+    }
+
+    return parteRespuesta;
 }
 
 function reiniciar() {
