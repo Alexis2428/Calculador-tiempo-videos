@@ -46,8 +46,8 @@ function crearCuadroTiempo(tiempo) {
 
     const $cuadroTexto = document.createElement('input');
     $cuadroTexto.type = 'number';
-    $cuadroTexto.className = 'form-control';
-    $cuadroTexto.id = tiempo;
+    $cuadroTexto.classList.add('form-control');
+    $cuadroTexto.classList.add(`cantidad-${tiempo}`);
     $cuadroTexto.setAttribute('placeholder', tiempo);
 
     const $texto = document.createElement('label');
