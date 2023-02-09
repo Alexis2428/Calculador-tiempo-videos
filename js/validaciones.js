@@ -51,6 +51,8 @@ function manejarErrores(errores) {
         })
     })
 
+    borrarErroresCorregidos(errores);
+
     return cantidadErrores;
 }
 
@@ -79,5 +81,33 @@ function borrarErroresAnteriores() {
 
     for (let i = 0; i < $errores.length; i++) {
         $errores[i].remove();
+    }
+}
+
+function borrarErroresCorregidos(errores) {
+    const $listaErrores = $formulario.querySelectorAll('#errores li');
+    const keysErrores = Object.keys(errores);
+
+    for (let i = 0; i < $listaErrores.length; i++) {
+        let errorCorregido = true;
+
+        for (let llave = 0; llave < keysErrores.length; llave++) {
+            const valuesErrores = Object.values(errores[keysErrores[llave]]);
+
+            for (let j = 0; j < valuesErrores.length; j++) {
+                if ($listaErrores[i].textContent === valuesErrores[j]) {
+                    errorCorregido = false;
+                    break;
+                }
+            }
+            
+            if (!errorCorregido) {
+                break;
+            }
+        }
+
+        if (errorCorregido) {
+            $listaErrores[i].remove();
+        }
     }
 }
