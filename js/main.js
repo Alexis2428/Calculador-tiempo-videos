@@ -86,11 +86,9 @@ function obtenerRespuesta() {
     const $minutos = $formulario.querySelectorAll('.cantidad-minutos');
     const $horas = $formulario.querySelectorAll('.cantidad-horas');
     
-    const campoSegundosValido = validarTiempo($segundos);
-    const campoMinutosValido = validarTiempo($minutos);
-    const campoHorasValido = validarTiempo($horas);
+    const camposValidos = validarTiempo($segundos, $minutos, $horas);
 
-    if (campoSegundosValido && campoMinutosValido && campoHorasValido) {
+    if (camposValidos) {
         borrarErroresAnteriores();
         $formulario.querySelector('#tiempo-total').textContent = obtenerTiempoTotal($segundos, $minutos, $horas);
         mostrarRespuesta();
