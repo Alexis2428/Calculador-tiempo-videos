@@ -30,23 +30,25 @@ function validarNumero(numero) {
     return '';
 }
 
-function manejarErrores($numerosTiempo, errores) {
+function manejarErrores(errores) {
     let cantidadErrores = 0;
 
-    Object.keys(errores).forEach(function(indice) {
-        const error = errores[indice];
+    Object.keys(errores).forEach(function(key) {
+        Object.keys(errores[key]).forEach(function(indice) {
+            const error = errores[key][indice];
 
-        if (error) {
-            cantidadErrores++;
-            $numerosTiempo[indice].classList.add('error');
+            if (error) {
+                cantidadErrores++;
+                $formulario.querySelectorAll(`.cantidad-${key}`)[indice].classList.add('error');
 
-            if (!comprobarExisteError(error)) {
-                crearError(error);
+                if (!comprobarExisteError(error)) {
+                    crearError(error);
+                }
+
+            } else {
+                $formulario.querySelectorAll(`.cantidad-${key}`)[indice].classList.remove('error');
             }
-
-        } else {
-            $numerosTiempo[indice].classList.remove('error');
-        }
+        })
     })
 
     return cantidadErrores;
