@@ -1,11 +1,21 @@
-function validarTiempo($numerosTiempo) {
-    const errores = {};
+function validarTiempo($segundos, $minutos, $horas) {
+    const errores = {
+        segundos: {},
+        minutos: {},
+        horas: {}
+    };
 
-    for (let i = 0; i < $numerosTiempo.length; i++) {
-        errores[i] = validarNumero($numerosTiempo[i].value);
+    for (let i = 0; i < $segundos.length; i++) {
+        errores.segundos[i] = validarNumero($segundos[i].value);
+    }
+    for (let i = 0; i < $minutos.length; i++) {
+        errores.minutos[i] = validarNumero($minutos[i].value);
+    }
+    for (let i = 0; i < $horas.length; i++) {
+        errores.horas[i] = validarNumero($horas[i].value);
     }
 
-    return 0 === manejarErrores($numerosTiempo, errores)
+    return 0 === manejarErrores(errores);
 }
 
 function validarNumero(numero) {
